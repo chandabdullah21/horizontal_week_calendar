@@ -1,4 +1,4 @@
-### Installation
+## Installation
 
 Add `horizontal_week_calendar:` to your **pubspec.yaml** dependencies then run `flutter pub get`
 
@@ -7,7 +7,7 @@ Add `horizontal_week_calendar:` to your **pubspec.yaml** dependencies then run `
   horizontal_week_calendar:
 ```
 
-### Import
+## Import
 
 Add this line to import the package.
 ```
@@ -15,7 +15,7 @@ import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 ```
 
 
-### How to use
+## How to use
 
 ```dart
 HorizontalWeekCalendar(
@@ -26,4 +26,8 @@ HorizontalWeekCalendar(
   },
 ),
 ```
+
+## Preview
+
+![Horizontal Week Calendar](https://raw.githubusercontent.com/ChandAbdullah/horizontal_week_calendar/main/assets/horizontal_week_calendar.png)
 

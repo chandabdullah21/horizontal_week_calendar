@@ -1,3 +1,25 @@
+## 0.0.6
+
+* Fixings
+
+## 0.0.5
+
+* On week change function added
+* On Date select function added
+
+## 0.0.4
+
+* Color Scheme Fixings
+
+## 0.0.3
+
+* Bug Fixings
+
+## 0.0.2
+
+* Some Improvements
+
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* Init New Package
