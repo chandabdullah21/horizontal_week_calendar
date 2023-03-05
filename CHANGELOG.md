@@ -1,3 +1,7 @@
+## 0.0.8
+
+* Add example
+
 ## 0.0.6
 
 * Fixings
