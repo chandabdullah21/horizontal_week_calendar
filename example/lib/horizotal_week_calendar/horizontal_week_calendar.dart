@@ -1,5 +1,3 @@
-library horizontal_week_calendar;
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -13,53 +11,53 @@ class HorizontalWeekCalendar extends StatefulWidget {
 
   // ======================
 
-  /// active background color
+  /// Active background color
   ///
-  /// default value *(primary color)*
+  /// Default value *(primary color)*
   final Color? activeBackgroundColor;
 
-  /// in-active background color
+  /// In-Active background color
   ///
-  /// default value *primary color withOpacity(.2)*
+  /// Default value *primary color withOpacity(.2)*
   final Color? inactiveBackgroundColor;
 
-  /// disable background color
+  /// Disable background color
   ///
-  /// default value *Colors.grey*
+  /// Default value *Colors.grey*
   final Color? disabledBackgroundColor;
 
   // ======================
 
-  /// active text color
+  /// Active text color
   ///
-  /// default value *(primary color)*
+  /// Default value *(primary color)*
   final Color? activeTextColor;
 
-  /// in-active text color
+  /// In-Active text color
   ///
-  /// default value *primary color withOpacity(.2)*
+  /// Default value *primary color withOpacity(.2)*
   final Color? inactiveTextColor;
 
-  /// disable text color
+  /// Disable text color
   ///
-  /// default value *Colors.grey*
+  /// Default value *Colors.grey*
   final Color? disabledTextColor;
 
   // ======================
 
-  /// active Navigator color
+  /// Active Navigator color
   ///
-  /// default value *(primary color)*
+  /// Default value *(primary color)*
   final Color? activeNavigatorColor;
 
-  /// in-active Navigator color
+  /// In-Active Navigator color
   ///
-  /// default value *Colors.grey*
+  /// Default value *Colors.grey*
   final Color? inactiveNavigatorColor;
 
-  /// month Color
+  /// Month Color
   ///
-  /// default value *(primary color)*
+  /// Default value *(primary color)*
   final Color? monthColor;
 
   const HorizontalWeekCalendar({

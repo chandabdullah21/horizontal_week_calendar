@@ -1,6 +1,6 @@
 name: horizontal_week_calendar
 description: A horizontal week calender with on change week and on date selected function
-version: 0.0.8
+version: 0.0.9
 homepage: https://github.com/ChandAbdullah/horizontal_week_calendar
 
 environment:
@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl:
-  carousel_slider:
+  intl: ^0.18.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

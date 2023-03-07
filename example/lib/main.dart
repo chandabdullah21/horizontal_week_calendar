@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
+// import 'package:horizontal_week_calendar/horizontal_week_calendar.dart';
 import 'package:intl/intl.dart';
+import 'package:packages_test/horizotal_week_calendar/horizontal_week_calendar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +40,7 @@ class _HorizontalWeekCalendarPackageState
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.purple,
         title: const Text(
           "Horizontal Week Calendar",
         ),
@@ -48,7 +50,16 @@ class _HorizontalWeekCalendarPackageState
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              CustomWeekCalender(
+              HorizontalWeekCalendar(
+                activeBackgroundColor: Colors.purple,
+                activeTextColor: Colors.white,
+                inactiveBackgroundColor: Colors.purple.withOpacity(.3),
+                inactiveTextColor: Colors.white,
+                disabledTextColor: Colors.grey,
+                disabledBackgroundColor: Colors.grey.withOpacity(.3),
+                activeNavigatorColor: Colors.purple,
+                inactiveNavigatorColor: Colors.grey,
+                monthColor: Colors.purple,
                 onDateChange: (date) {
                   setState(() {
                     selectedDate = date;

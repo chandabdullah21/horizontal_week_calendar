@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Added custom colors
+
 ## 0.0.8
 
 * Add example
