@@ -2,62 +2,64 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
+enum WeekStartFrom {
+  Sunday,
+  Monday,
+}
+
 class HorizontalWeekCalendar extends StatefulWidget {
+  /// week start from [WeekStartFrom.Monday]
+  final WeekStartFrom? weekStartFrom;
+
   ///get DateTime on date select
   final Function(DateTime)? onDateChange;
 
   ///get the list of DateTime on week change
   final Function(List<DateTime>)? onWeekChange;
 
-  // ======================
-
   /// Active background color
   ///
-  /// Default value *(primary color)*
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeBackgroundColor;
 
   /// In-Active background color
   ///
-  /// Default value *primary color withOpacity(.2)*
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? inactiveBackgroundColor;
 
   /// Disable background color
   ///
-  /// Default value *Colors.grey*
+  /// Default value [Colors.grey]
   final Color? disabledBackgroundColor;
-
-  // ======================
 
   /// Active text color
   ///
-  /// Default value *(primary color)*
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeTextColor;
 
   /// In-Active text color
   ///
-  /// Default value *primary color withOpacity(.2)*
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? inactiveTextColor;
 
   /// Disable text color
   ///
-  /// Default value *Colors.grey*
+  /// Default value [Colors.grey]
   final Color? disabledTextColor;
-
-  // ======================
 
   /// Active Navigator color
   ///
-  /// Default value *(primary color)*
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeNavigatorColor;
 
   /// In-Active Navigator color
   ///
-  /// Default value *Colors.grey*
+  /// Default value [Colors.grey]
   final Color? inactiveNavigatorColor;
 
   /// Month Color
   ///
-  /// Default value *(primary color)*
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? monthColor;
 
   const HorizontalWeekCalendar({
@@ -67,12 +69,13 @@ class HorizontalWeekCalendar extends StatefulWidget {
     this.activeBackgroundColor,
     this.inactiveBackgroundColor,
     this.disabledBackgroundColor,
-    this.activeTextColor,
+    this.activeTextColor = Colors.white,
     this.inactiveTextColor,
     this.disabledTextColor,
     this.activeNavigatorColor,
     this.inactiveNavigatorColor,
     this.monthColor,
+    this.weekStartFrom = WeekStartFrom.Monday,
   });
 
   @override
@@ -95,21 +98,36 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     super.initState();
   }
 
+  DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
+
   initCalender() {
-    List<DateTime> minus3Days = [];
-    List<DateTime> add3Days = [];
-    for (int index = 0; index < 3; index++) {
-      DateTime minusDate = today.add(Duration(days: -(index + 1)));
-      minus3Days.add(minusDate);
-      DateTime addDate = today.add(Duration(days: (index + 1)));
-      add3Days.add(addDate);
+    // List<DateTime> minus3Days = [];
+    // List<DateTime> add3Days = [];
+    // for (int index = 0; index < 3; index++) {
+    //   DateTime minusDate = today.add(Duration(days: -(index + 1)));
+    //   minus3Days.add(minusDate);
+    //   DateTime addDate = today.add(Duration(days: (index + 1)));
+    //   add3Days.add(addDate);
+    // }
+    // currentWeek.addAll(minus3Days.reversed.toList());
+    // currentWeek.add(today);
+    // currentWeek.addAll(add3Days);
+    // listOfWeeks.add(currentWeek);
+
+    final date = DateTime.now();
+
+    DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
+        ? getDate(date.subtract(Duration(days: date.weekday - 1)))
+        : getDate(date.subtract(Duration(days: date.weekday % 7)));
+
+    currentWeek.add(startOfCurrentWeek);
+    for (int index = 0; index < 6; index++) {
+      DateTime addDate = startOfCurrentWeek.add(Duration(days: (index + 1)));
+      currentWeek.add(addDate);
     }
 
-    currentWeek.addAll(minus3Days.reversed.toList());
-    currentWeek.add(today);
-    currentWeek.addAll(add3Days);
-
     listOfWeeks.add(currentWeek);
+
     getMorePreviousWeeks();
   }
 
@@ -127,7 +145,6 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     }
     listOfWeeks.add(minus7Days.reversed.toList());
     setState(() {});
-    // Logger().d(listOfWeeks.length);
   }
 
   onDateSelect(DateTime date) {

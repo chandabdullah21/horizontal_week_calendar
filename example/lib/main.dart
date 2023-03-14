@@ -51,6 +51,7 @@ class _HorizontalWeekCalendarPackageState
           child: Column(
             children: [
               HorizontalWeekCalendar(
+                weekStartFrom: WeekStartFrom.Monday,
                 activeBackgroundColor: Colors.purple,
                 activeTextColor: Colors.white,
                 inactiveBackgroundColor: Colors.purple.withOpacity(.3),
