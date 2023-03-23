@@ -8,7 +8,9 @@ enum WeekStartFrom {
 }
 
 class HorizontalWeekCalendar extends StatefulWidget {
-  /// week start from [WeekStartFrom.Monday]
+  /// week start from Monday or Sunday
+  ///
+  /// default value [WeekStartFrom.Monday]
   final WeekStartFrom? weekStartFrom;
 
   ///get DateTime on date select
@@ -19,47 +21,47 @@ class HorizontalWeekCalendar extends StatefulWidget {
 
   /// Active background color
   ///
-  /// Default value [Theme.of(context).primaryColor]
+  /// Default value `Theme.of(context).primaryColor`
   final Color? activeBackgroundColor;
 
   /// In-Active background color
   ///
-  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
+  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
   final Color? inactiveBackgroundColor;
 
   /// Disable background color
   ///
-  /// Default value [Colors.grey]
+  /// Default value `Colors.grey`
   final Color? disabledBackgroundColor;
 
   /// Active text color
   ///
-  /// Default value [Theme.of(context).primaryColor]
+  /// Default value `Theme.of(context).primaryColor`
   final Color? activeTextColor;
 
   /// In-Active text color
   ///
-  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
+  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
   final Color? inactiveTextColor;
 
   /// Disable text color
   ///
-  /// Default value [Colors.grey]
+  /// Default value `Colors.grey`
   final Color? disabledTextColor;
 
   /// Active Navigator color
   ///
-  /// Default value [Theme.of(context).primaryColor]
+  /// Default value `Theme.of(context).primaryColor`
   final Color? activeNavigatorColor;
 
   /// In-Active Navigator color
   ///
-  /// Default value [Colors.grey]
+  /// Default value `Colors.grey`
   final Color? inactiveNavigatorColor;
 
   /// Month Color
   ///
-  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
+  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
   final Color? monthColor;
 
   const HorizontalWeekCalendar({
@@ -163,6 +165,13 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   }
 
   onWeekChange(index) {
+    if (currentWeekIndex < index) {
+      // on back
+    }
+    if (currentWeekIndex > index) {
+      // on next
+    }
+
     currentWeekIndex = index;
     currentWeek = listOfWeeks[currentWeekIndex];
 

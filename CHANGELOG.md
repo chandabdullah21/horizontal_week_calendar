@@ -1,3 +1,7 @@
+## 0.0.10
+
+* new attribute added [WeekStartFrom]
+
 ## 0.0.9
 
 * Added custom colors
