@@ -8,9 +8,7 @@ enum WeekStartFrom {
 }
 
 class HorizontalWeekCalendar extends StatefulWidget {
-  /// week start from Monday or Sunday
-  ///
-  /// default value [WeekStartFrom.Monday]
+  /// week start from [WeekStartFrom.Monday]
   final WeekStartFrom? weekStartFrom;
 
   ///get DateTime on date select
@@ -21,70 +19,90 @@ class HorizontalWeekCalendar extends StatefulWidget {
 
   /// Active background color
   ///
-  /// Default value `Theme.of(context).primaryColor`
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeBackgroundColor;
 
   /// In-Active background color
   ///
-  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? inactiveBackgroundColor;
 
   /// Disable background color
   ///
-  /// Default value `Colors.grey`
+  /// Default value [Colors.grey]
   final Color? disabledBackgroundColor;
 
   /// Active text color
   ///
-  /// Default value `Theme.of(context).primaryColor`
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeTextColor;
 
   /// In-Active text color
   ///
-  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? inactiveTextColor;
 
   /// Disable text color
   ///
-  /// Default value `Colors.grey`
+  /// Default value [Colors.grey]
   final Color? disabledTextColor;
 
   /// Active Navigator color
   ///
-  /// Default value `Theme.of(context).primaryColor`
+  /// Default value [Theme.of(context).primaryColor]
   final Color? activeNavigatorColor;
 
   /// In-Active Navigator color
   ///
-  /// Default value `Colors.grey`
+  /// Default value [Colors.grey]
   final Color? inactiveNavigatorColor;
 
   /// Month Color
   ///
-  /// Default value `Theme.of(context).primaryColor.withOpacity(.2)`
+  /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? monthColor;
 
-  const HorizontalWeekCalendar({
-    super.key,
-    this.onDateChange,
-    this.onWeekChange,
-    this.activeBackgroundColor,
-    this.inactiveBackgroundColor,
-    this.disabledBackgroundColor,
-    this.activeTextColor = Colors.white,
-    this.inactiveTextColor,
-    this.disabledTextColor,
-    this.activeNavigatorColor,
-    this.inactiveNavigatorColor,
-    this.monthColor,
-    this.weekStartFrom = WeekStartFrom.Monday,
-  });
+  /// Back Title
+  /// Allow user to change name for back
+  /// Default value [String] "Back"
+  final String? backTitle;
+
+  /// Next Title
+  /// Allow user to change name for next
+  /// Default value [String] "Next"
+  final String? nextTitle;
+
+  /// SizeBottom
+  /// Allows you to set the size of the bottom of the calendar
+  /// Each time you change the size, you have to rebuild the application
+  /// Default value [int] 8
+  final int? sizeBottom;
+
+  const HorizontalWeekCalendar(
+      {super.key,
+      this.onDateChange,
+      this.onWeekChange,
+      this.activeBackgroundColor,
+      this.inactiveBackgroundColor,
+      this.disabledBackgroundColor,
+      this.activeTextColor = Colors.white,
+      this.inactiveTextColor,
+      this.disabledTextColor,
+      this.activeNavigatorColor,
+      this.inactiveNavigatorColor,
+      this.monthColor,
+      this.weekStartFrom = WeekStartFrom.Monday,
+      this.backTitle = "Back",
+      this.nextTitle = "Next",
+      this.sizeBottom = 7});
 
   @override
-  State<HorizontalWeekCalendar> createState() => _HorizontalWeekCalendarState();
+  State<HorizontalWeekCalendar> createState() =>
+      _HorizontalWeekCalendarState(sizeBottom: sizeBottom ?? 8);
 }
 
 class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
+  final int sizeBottom;
   CarouselController carouselController = CarouselController();
 
   DateTime today = DateTime.now();
@@ -93,6 +111,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   int currentWeekIndex = 0;
 
   List<List<DateTime>> listOfWeeks = [];
+
+  _HorizontalWeekCalendarState({required this.sizeBottom});
 
   @override
   void initState() {
@@ -165,13 +185,6 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   }
 
   onWeekChange(index) {
-    if (currentWeekIndex < index) {
-      // on back
-    }
-    if (currentWeekIndex > index) {
-      // on next
-    }
-
     currentWeekIndex = index;
     currentWeek = listOfWeeks[currentWeekIndex];
 
@@ -199,7 +212,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     var theme = Theme.of(context);
     var withOfScreen = MediaQuery.of(context).size.width;
 
-    double boxHeight = withOfScreen / 7;
+    double boxHeight = withOfScreen / sizeBottom;
 
     return currentWeek.isEmpty
         ? const SizedBox()
@@ -226,7 +239,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                           width: 4,
                         ),
                         Text(
-                          "Back",
+                          widget.backTitle.toString(),
                           style: theme.textTheme.bodyLarge!.copyWith(
                             color: widget.activeNavigatorColor ??
                                 theme.primaryColor,
@@ -259,7 +272,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Next",
+                          widget.nextTitle.toString(),
                           style: theme.textTheme.bodyLarge!.copyWith(
                             color: isNextDisabled()
                                 ? theme.primaryColor

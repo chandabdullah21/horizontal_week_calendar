@@ -10,9 +10,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:packages_test/main.dart';
 
-// ignore: avoid_relative_lib_imports
-import '../lib/main.dart';
-
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
