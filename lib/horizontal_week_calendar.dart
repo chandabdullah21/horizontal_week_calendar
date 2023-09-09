@@ -64,6 +64,11 @@ class HorizontalWeekCalendar extends StatefulWidget {
   /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? monthColor;
 
+  /// Back Title
+  /// Allow user to change name for back
+  /// Default value [String] "Back"
+  final String? backTitle;
+
   const HorizontalWeekCalendar({
     super.key,
     this.onDateChange,
@@ -78,6 +83,7 @@ class HorizontalWeekCalendar extends StatefulWidget {
     this.inactiveNavigatorColor,
     this.monthColor,
     this.weekStartFrom = WeekStartFrom.Monday,
+    this.backTitle = "Back",
   });
 
   @override
@@ -219,7 +225,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                           width: 4,
                         ),
                         Text(
-                          "Back",
+                          widget.backTitle.toString(),
                           style: theme.textTheme.bodyLarge!.copyWith(
                             color: widget.activeNavigatorColor ??
                                 theme.primaryColor,
