@@ -74,29 +74,37 @@ class HorizontalWeekCalendar extends StatefulWidget {
   /// Default value [String] "Next"
   final String? nextTitle;
 
-  const HorizontalWeekCalendar({
-    super.key,
-    this.onDateChange,
-    this.onWeekChange,
-    this.activeBackgroundColor,
-    this.inactiveBackgroundColor,
-    this.disabledBackgroundColor,
-    this.activeTextColor = Colors.white,
-    this.inactiveTextColor,
-    this.disabledTextColor,
-    this.activeNavigatorColor,
-    this.inactiveNavigatorColor,
-    this.monthColor,
-    this.weekStartFrom = WeekStartFrom.Monday,
-    this.backTitle = "Back",
-    this.nextTitle = "Next",
-  });
+  /// SizeBottom
+  /// Allows you to set the size of the bottom of the calendar
+  /// Each time you change the size, you have to rebuild the application
+  /// Default value [int] 8
+  final int? sizeBottom;
+
+  const HorizontalWeekCalendar(
+      {super.key,
+      this.onDateChange,
+      this.onWeekChange,
+      this.activeBackgroundColor,
+      this.inactiveBackgroundColor,
+      this.disabledBackgroundColor,
+      this.activeTextColor = Colors.white,
+      this.inactiveTextColor,
+      this.disabledTextColor,
+      this.activeNavigatorColor,
+      this.inactiveNavigatorColor,
+      this.monthColor,
+      this.weekStartFrom = WeekStartFrom.Monday,
+      this.backTitle = "Back",
+      this.nextTitle = "Next",
+      this.sizeBottom = 7});
 
   @override
-  State<HorizontalWeekCalendar> createState() => _HorizontalWeekCalendarState();
+  State<HorizontalWeekCalendar> createState() =>
+      _HorizontalWeekCalendarState(sizeBottom: sizeBottom ?? 8);
 }
 
 class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
+  final int sizeBottom;
   CarouselController carouselController = CarouselController();
 
   DateTime today = DateTime.now();
@@ -105,6 +113,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   int currentWeekIndex = 0;
 
   List<List<DateTime>> listOfWeeks = [];
+
+  _HorizontalWeekCalendarState({required this.sizeBottom});
 
   @override
   void initState() {
@@ -204,7 +214,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     var theme = Theme.of(context);
     var withOfScreen = MediaQuery.of(context).size.width;
 
-    double boxHeight = withOfScreen / 7;
+    double boxHeight = withOfScreen / sizeBottom;
 
     return currentWeek.isEmpty
         ? const SizedBox()
