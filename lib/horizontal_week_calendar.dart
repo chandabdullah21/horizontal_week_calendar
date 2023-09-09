@@ -69,6 +69,11 @@ class HorizontalWeekCalendar extends StatefulWidget {
   /// Default value [String] "Back"
   final String? backTitle;
 
+  /// Next Title
+  /// Allow user to change name for next
+  /// Default value [String] "Next"
+  final String? nextTitle;
+
   const HorizontalWeekCalendar({
     super.key,
     this.onDateChange,
@@ -84,6 +89,7 @@ class HorizontalWeekCalendar extends StatefulWidget {
     this.monthColor,
     this.weekStartFrom = WeekStartFrom.Monday,
     this.backTitle = "Back",
+    this.nextTitle = "Next",
   });
 
   @override
@@ -258,7 +264,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Next",
+                          widget.nextTitle.toString(),
                           style: theme.textTheme.bodyLarge!.copyWith(
                             color: isNextDisabled()
                                 ? theme.primaryColor
